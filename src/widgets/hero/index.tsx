@@ -87,7 +87,7 @@ export function Hero() {
                 transition={{ delay: 0.3, duration: 0.8 }}
                 className="text-4xl lg:text-6xl font-bold tracking-tight"
               >
-                Hi, I'm{" "}
+                Hi, I&apos;m{" "}
                 <span className="text-indigo-600 dark:text-indigo-400">
                   Sovanthoeun
                 </span>

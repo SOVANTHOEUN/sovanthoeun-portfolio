@@ -84,7 +84,7 @@ export function Skills() {
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Technical Skills</h2>
           <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            With over 7 years of experience, I've developed expertise in various
+            With over 7 years of experience, I&apos;ve developed expertise in various
             technologies across the full stack development spectrum.
           </p>
         </motion.div>
