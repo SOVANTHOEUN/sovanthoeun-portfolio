@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Sphere, MeshDistortMaterial, Environment, Float } from "@react-three/drei";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -21,7 +21,7 @@ function AnimatedSphere() {
 
   return (
     <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
-      <Sphere args={[1, 100, 200]} scale={2} ref={sphereRef}>
+      <Sphere args={[1, 100, 200]} scale={2.4} ref={sphereRef}>
         <MeshDistortMaterial
           color="#6366f1"
           attach="material"
@@ -37,17 +37,6 @@ function AnimatedSphere() {
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
@@ -75,14 +64,14 @@ export function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800"
     >
       <motion.div
         style={{ y, opacity }}
         className="container relative z-10 px-4 mx-auto"
       >
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          <div className="text-center lg:text-left space-y-6 lg:space-y-8 order-2 lg:order-1">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="text-center lg:text-left space-y-8">
             <div className="space-y-4">
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
@@ -96,7 +85,7 @@ export function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.8 }}
-                className="text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight"
+                className="text-4xl lg:text-6xl font-bold tracking-tight"
               >
                 Hi, I'm{" "}
                 <span className="text-indigo-600 dark:text-indigo-400">
@@ -105,13 +94,13 @@ export function Hero() {
               </motion.h1>
               <div className="overflow-hidden h-12">
                 <div className="role-text-container">
-                  <p className="role-text text-lg sm:text-xl text-gray-600 dark:text-gray-300">
+                  <p className="role-text text-xl text-gray-600 dark:text-gray-300">
                     {"<"} Java Developer {"/>"}
                   </p>
-                  <p className="role-text text-lg sm:text-xl text-gray-600 dark:text-gray-300">
+                  <p className="role-text text-xl text-gray-600 dark:text-gray-300">
                     {"<"} React Engineer {"/>"}
                   </p>
-                  <p className="role-text text-lg sm:text-xl text-gray-600 dark:text-gray-300">
+                  <p className="role-text text-xl text-gray-600 dark:text-gray-300">
                     {"<"} UI/UX Enthusiast {"/>"}
                   </p>
                 </div>
@@ -122,7 +111,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto lg:mx-0"
+              className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto lg:mx-0"
             >
               7+ years of experience crafting elegant solutions with Spring Cloud,
               React, and modern web technologies. Currently exploring AI/ML and
@@ -137,13 +126,13 @@ export function Hero() {
             >
               <a
                 href="#projects"
-                className="btn btn-primary min-w-[140px] sm:min-w-[150px] flex items-center justify-center text-sm sm:text-base"
+                className="btn btn-primary min-w-[150px] flex items-center justify-center"
               >
                 View Projects
               </a>
               <a
                 href="/resume.pdf"
-                className="btn btn-outline min-w-[140px] sm:min-w-[150px] flex items-center justify-center text-sm sm:text-base"
+                className="btn btn-outline min-w-[150px] flex items-center justify-center"
                 download
               >
                 Download CV
@@ -185,11 +174,11 @@ export function Hero() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
-            className="relative h-[250px] sm:h-[300px] lg:h-[500px] order-1 lg:order-2"
+            className="relative h-[400px] lg:h-[600px] -order-1 lg:order-1"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full blur-3xl opacity-20 dark:opacity-40 animate-pulse" />
             <Canvas
-              camera={{ position: [0, 0, isMobile ? 6 : 5], fov: 45 }}
+              camera={{ position: [0, 0, 5], fov: 45 }}
               className="canvas-container"
             >
               <color attach="background" args={['transparent']} />

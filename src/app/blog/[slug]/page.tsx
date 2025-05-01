@@ -75,14 +75,17 @@ Building modern web applications is an exciting journey. With the right tools an
 
 function BlogScene() {
   return (
-    <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
+    <Canvas
+      camera={{ position: [0, 0, 5], fov: 45 }}
+      style={{ height: '100%', width: '100%' }}
+    >
       <ambientLight intensity={0.5} />
       <directionalLight position={[2, 2, 5]} intensity={1} />
       <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
         <Center>
           <Text3D
             font="/fonts/Inter_Bold.json"
-            size={0.5}
+            size={0.35}
             height={0.2}
             curveSegments={12}
           >
@@ -95,7 +98,7 @@ function BlogScene() {
   );
 }
 
-export default function BlogPage() {
+export default function BlogPage({ params }: { params: { slug: string } }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -107,7 +110,7 @@ export default function BlogPage() {
 
   return (
     <main className="min-h-screen bg-white dark:bg-gray-900">
-      <div className="relative h-[50vh] overflow-hidden">
+      <div className="relative h-[40vh] sm:h-[45vh] md:h-[50vh] w-full overflow-hidden">
         <motion.div
           style={{ opacity, y }}
           className="absolute inset-0 z-10"
@@ -117,17 +120,17 @@ export default function BlogPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white dark:to-gray-900" />
       </div>
 
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="max-w-4xl mx-auto"
         >
-          <div className="prose dark:prose-invert max-w-none">
+          <div className="prose dark:prose-invert max-w-none prose-sm sm:prose-base md:prose-lg">
             <ReactMarkdown
               components={{
-                code({ inline, className, children, ...props }) {
+                code({ node, inline, className, children, ...props }) {
                   const match = /language-(\w+)/.exec(className || "");
                   return !inline && match ? (
                     <SyntaxHighlighter
@@ -150,23 +153,23 @@ export default function BlogPage() {
             </ReactMarkdown>
           </div>
 
-          <div className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-800">
-            <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
+          <div className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-gray-200 dark:border-gray-800">
+            <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-900 dark:text-white">
               Related Posts
             </h2>
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 sm:gap-8">
               {blogData.relatedPosts.map((post) => (
                 <motion.a
                   key={post.slug}
                   href={`/blog/${post.slug}`}
-                  className="block p-6 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg transition-shadow"
+                  className="block p-4 sm:p-6 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg transition-shadow"
                   whileHover={{ y: -5 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
+                  <h3 className="text-lg sm:text-xl font-semibold mb-2 text-gray-900 dark:text-white">
                     {post.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-300">
+                  <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">
                     {post.excerpt}
                   </p>
                 </motion.a>

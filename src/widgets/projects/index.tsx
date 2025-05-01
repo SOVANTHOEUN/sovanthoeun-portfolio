@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { FiGithub, FiExternalLink, FiCheck } from "react-icons/fi";
+import { FiGithub, FiExternalLink } from "react-icons/fi";
 
 const projects = [
   {
@@ -146,21 +146,6 @@ export function Projects() {
                     </span>
                   ))}
                 </div>
-
-                <ul className="space-y-4 mt-4">
-                  {projectData.features.map((feature) => (
-                    <motion.li
-                      key={feature}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.1 }}
-                      className="flex items-center gap-3 text-gray-600 dark:text-gray-300"
-                    >
-                      <FiCheck className="text-indigo-600 dark:text-indigo-400 flex-shrink-0" />
-                      <span>{feature}</span>
-                    </motion.li>
-                  ))}
-                </ul>
               </div>
             </motion.div>
           ))}
