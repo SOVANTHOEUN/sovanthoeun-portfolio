@@ -6,6 +6,7 @@ import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { BlogScene } from "./scene";
+import { useSpring } from "framer-motion";
 
 
 interface BlogPost {
@@ -30,15 +31,23 @@ export function BlogClient({ post }: BlogClientProps) {
     offset: ["start start", "end start"],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-  const y = useTransform(scrollYProgress, [0, 0.2], [0, -100]);
+  // Use spring animation for smoother transitions
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  const opacity = useTransform(smoothProgress, [0, 0.2], [1, 0]);
+  const y = useTransform(smoothProgress, [0, 0.2], [0, -100]);
 
   return (
-    <main className="min-h-screen bg-white dark:bg-gray-900">
+    <main ref={containerRef} className="min-h-screen bg-white dark:bg-gray-900">
       <div className="relative h-[40vh] sm:h-[45vh] md:h-[50vh] w-full overflow-hidden">
         <motion.div
           style={{ opacity, y }}
           className="absolute inset-0 z-10"
+          transition={{ type: "spring", stiffness: 100, damping: 30 }}
         >
           <BlogScene title={post.title} />
         </motion.div>
@@ -49,7 +58,12 @@ export function BlogClient({ post }: BlogClientProps) {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ 
+            type: "spring",
+            stiffness: 100,
+            damping: 20,
+            duration: 0.6 
+          }}
           className="max-w-4xl mx-auto"
         >
           <div className="prose dark:prose-invert max-w-none prose-sm sm:prose-base md:prose-lg">
@@ -89,7 +103,11 @@ export function BlogClient({ post }: BlogClientProps) {
                   href={`/blog/${relatedPost.slug}`}
                   className="block p-4 sm:p-6 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg transition-shadow"
                   whileHover={{ y: -5 }}
-                  transition={{ duration: 0.2 }}
+                  transition={{ 
+                    type: "spring",
+                    stiffness: 400,
+                    damping: 25
+                  }}
                 >
                   <h3 className="text-lg sm:text-xl font-semibold mb-2 text-gray-900 dark:text-white">
                     {relatedPost.title}
@@ -106,7 +124,7 @@ export function BlogClient({ post }: BlogClientProps) {
 
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-indigo-600 dark:bg-indigo-400 origin-left"
-        style={{ scaleX: scrollYProgress }}
+        style={{ scaleX: smoothProgress }}
       />
     </main>
   );
