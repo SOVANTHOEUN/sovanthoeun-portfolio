@@ -95,7 +95,7 @@ function BlogScene() {
   );
 }
 
-export default function BlogPage({ params }: { params: { slug: string } }) {
+export default function BlogPage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -127,7 +127,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
           <div className="prose dark:prose-invert max-w-none">
             <ReactMarkdown
               components={{
-                code({ node, inline, className, children, ...props }) {
+                code({ inline, className, children, ...props }) {
                   const match = /language-(\w+)/.exec(className || "");
                   return !inline && match ? (
                     <SyntaxHighlighter

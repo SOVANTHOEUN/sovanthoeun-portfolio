@@ -46,7 +46,7 @@ function ProjectScene() {
   );
 }
 
-export default function ProjectPage({ params }: { params: { slug: string } }) {
+export default function ProjectPage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
