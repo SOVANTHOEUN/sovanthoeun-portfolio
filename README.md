@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio Website
+
+A modern, responsive portfolio website built with Next.js 14, React, and TypeScript. Features a clean design, dark mode support, and interactive 3D elements.
+
+## Features
+
+- 🎨 Modern and responsive design
+- 🌓 Dark/Light mode toggle
+- 🎮 Interactive 3D elements using Three.js
+- 📱 Mobile-first approach
+- ⚡ Fast performance with Next.js
+- 🎯 SEO optimized
+- 📝 Blog section for sharing experiences
+- 🛠️ Built with TypeScript for type safety
+
+## Tech Stack
+
+- Next.js 14 (App Router)
+- React
+- TypeScript
+- Tailwind CSS
+- Three.js
+- Framer Motion
+- next-themes
 
 ## Getting Started
 
-First, run the development server:
-
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/yourusername/portfolio.git
+cd portfolio
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Run the development server:
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/                 # Next.js app router pages
+├── shared/             # Shared components and utilities
+│   ├── ui/            # Reusable UI components
+│   ├── lib/           # Utility functions and hooks
+│   └── config/        # Configuration files
+├── entities/          # Business entities
+│   ├── project/       # Project-related components
+│   ├── skill/         # Skill-related components
+│   └── blog/          # Blog-related components
+├── features/          # Feature-specific components
+│   ├── theme-toggle/  # Theme switching functionality
+│   └── 3d-scene/      # Three.js scene components
+└── widgets/           # Page sections
+    ├── header/        # Header component
+    ├── footer/        # Footer component
+    ├── hero/          # Hero section
+    ├── projects/      # Projects section
+    ├── skills/        # Skills section
+    └── blog/          # Blog section
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Customization
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Update the content in the respective component files
+2. Modify the theme colors in `tailwind.config.js`
+3. Add your own projects in the `Projects` component
+4. Customize the 3D scene in the `Hero` component
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The site can be easily deployed to Vercel:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+```
+
+## Contributing
+
+Feel free to submit issues and pull requests.
+
+## License
+
+MIT License - feel free to use this template for your own portfolio!
