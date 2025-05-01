@@ -1,18 +1,17 @@
-"use client";
-
-import { motion, useScroll, useTransform } from "framer-motion";
 import { Canvas } from "@react-three/fiber";
 import { Float, Text3D, Center } from "@react-three/drei";
-import { useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { BlogClient } from "./client";
 
-// This would come from your data source
-const blogData = {
-  title: "Building Modern Web Applications with Next.js and Three.js",
-  date: "March 15, 2024",
-  content: `
+// This would come from your data source 
+const blogPosts = [
+  {
+    slug: "building-modern-web-apps",
+    title: "Building Modern Web Applications with Next.js and Three.js",
+    date: "March 15, 2024",
+    content: `
 # Building Modern Web Applications
 
 Modern web applications require a combination of performance, interactivity, and visual appeal. In this post, we'll explore how to create engaging user experiences using Next.js and Three.js.
@@ -58,20 +57,28 @@ function Scene() {
 ## Conclusion
 
 Building modern web applications is an exciting journey. With the right tools and techniques, you can create amazing user experiences.
-  `,
-  relatedPosts: [
-    {
-      title: "Advanced Three.js Techniques",
-      slug: "advanced-threejs",
-      excerpt: "Learn advanced techniques for creating stunning 3D web experiences.",
-    },
-    {
-      title: "Next.js Performance Optimization",
-      slug: "nextjs-performance",
-      excerpt: "Tips and tricks for optimizing your Next.js applications.",
-    },
-  ],
-};
+    `,
+    relatedPosts: [
+      {
+        title: "Advanced Three.js Techniques",
+        slug: "advanced-threejs",
+        excerpt: "Learn advanced techniques for creating stunning 3D web experiences.",
+      },
+      {
+        title: "Next.js Performance Optimization",
+        slug: "nextjs-performance",
+        excerpt: "Tips and tricks for optimizing your Next.js applications.",
+      },
+    ],
+  },
+  // Add more blog posts here
+];
+
+export function generateStaticParams() {
+  return blogPosts.map((post) => ({
+    slug: post.slug,
+  }));
+}
 
 function BlogScene() {
   return (
@@ -89,7 +96,7 @@ function BlogScene() {
             height={0.2}
             curveSegments={12}
           >
-            {blogData.title}
+            {blogPosts[0].title}
             <meshStandardMaterial color="#6366f1" />
           </Text3D>
         </Center>
@@ -98,91 +105,10 @@ function BlogScene() {
   );
 }
 
-export default function BlogPage() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-  const y = useTransform(scrollYProgress, [0, 0.2], [0, -100]);
-
+export default function BlogPage({ params }: { params: { slug: string } }) {
+  const post = blogPosts.find((p) => p.slug === params.slug) || blogPosts[0];
+  
   return (
-    <main className="min-h-screen bg-white dark:bg-gray-900">
-      <div className="relative h-[40vh] sm:h-[45vh] md:h-[50vh] w-full overflow-hidden">
-        <motion.div
-          style={{ opacity, y }}
-          className="absolute inset-0 z-10"
-        >
-          <BlogScene />
-        </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white dark:to-gray-900" />
-      </div>
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-4xl mx-auto"
-        >
-          <div className="prose dark:prose-invert max-w-none prose-sm sm:prose-base md:prose-lg">
-            <ReactMarkdown
-              components={{
-                code({ className, children, ...props }) {
-                  const match = /language-(\w+)/.exec(className || "");
-                  return match ? (
-                    <SyntaxHighlighter
-                      style={vscDarkPlus}
-                      language={match[1]}
-                      PreTag="div"
-                      customStyle={{ margin: 0 }}
-                    >
-                      {String(children).replace(/\n$/, "")}
-                    </SyntaxHighlighter>
-                  ) : (
-                    <code className={className} {...props}>
-                      {children}
-                    </code>
-                  );
-                },
-              }}
-            >
-              {blogData.content}
-            </ReactMarkdown>
-          </div>
-
-          <div className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-gray-200 dark:border-gray-800">
-            <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-900 dark:text-white">
-              Related Posts
-            </h2>
-            <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 sm:gap-8">
-              {blogData.relatedPosts.map((post) => (
-                <motion.a
-                  key={post.slug}
-                  href={`/blog/${post.slug}`}
-                  className="block p-4 sm:p-6 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg transition-shadow"
-                  whileHover={{ y: -5 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <h3 className="text-lg sm:text-xl font-semibold mb-2 text-gray-900 dark:text-white">
-                    {post.title}
-                  </h3>
-                  <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">
-                    {post.excerpt}
-                  </p>
-                </motion.a>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-      </div>
-
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-indigo-600 dark:bg-indigo-400 origin-left"
-        style={{ scaleX: scrollYProgress }}
-      />
-    </main>
+    <BlogClient post={post} />
   );
 } 

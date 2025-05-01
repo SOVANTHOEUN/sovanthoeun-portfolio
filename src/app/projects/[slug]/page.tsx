@@ -7,21 +7,31 @@ import { FiGithub, FiExternalLink, FiCheck } from "react-icons/fi";
 import { useRef } from "react";
 
 // This would come from your data source
-const projectData = {
-  title: "Financial Web Application",
-  description: "A full-stack financial platform built with Spring Cloud and React.",
-  techStack: ["Spring Cloud", "React", "TypeScript", "Microservices"],
-  features: [
-    "Real-time financial data processing",
-    "Secure user authentication",
-    "Interactive data visualization",
-    "Microservices architecture",
-  ],
-  links: {
-    github: "https://github.com/yourusername/finance-app",
-    live: "https://finance-app.example.com",
+const projects = [
+  {
+    slug: "financial-web-app",
+    title: "Financial Web Application",
+    description: "A full-stack financial platform built with Spring Cloud and React.",
+    techStack: ["Spring Cloud", "React", "TypeScript", "Microservices"],
+    features: [
+      "Real-time financial data processing",
+      "Secure user authentication",
+      "Interactive data visualization",
+      "Microservices architecture",
+    ],
+    links: {
+      github: "https://github.com/yourusername/finance-app",
+      live: "https://finance-app.example.com",
+    },
   },
-};
+  // Add more projects here
+];
+
+export function generateStaticParams() {
+  return projects.map((project) => ({
+    slug: project.slug,
+  }));
+}
 
 function ProjectScene() {
   return (
