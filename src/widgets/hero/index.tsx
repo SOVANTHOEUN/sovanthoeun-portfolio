@@ -1,39 +1,10 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Sphere, MeshDistortMaterial, Environment, Float } from "@react-three/drei";
 import { motion, useScroll, useTransform } from "framer-motion";
 import gsap from "gsap";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { HiMail } from "react-icons/hi";
-import * as THREE from "three";
-
-function AnimatedSphere() {
-  const sphereRef = useRef<THREE.Mesh>(null);
-
-  useFrame((state) => {
-    if (sphereRef.current) {
-      sphereRef.current.rotation.x = state.clock.getElapsedTime() * 0.2;
-      sphereRef.current.rotation.y = state.clock.getElapsedTime() * 0.1;
-    }
-  });
-
-  return (
-    <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
-      <Sphere args={[1, 100, 200]} scale={2.4} ref={sphereRef}>
-        <MeshDistortMaterial
-          color="#6366f1"
-          attach="material"
-          distort={0.4}
-          speed={2}
-          roughness={0.2}
-          metalness={0.8}
-        />
-      </Sphere>
-    </Float>
-  );
-}
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -64,7 +35,7 @@ export function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800"
+      className="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800"
     >
       <motion.div
         style={{ y, opacity }}
@@ -169,37 +140,10 @@ export function Hero() {
               </a>
             </motion.div>
           </div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
-            className="relative h-[400px] lg:h-[600px] -order-1 lg:order-1"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full blur-3xl opacity-20 dark:opacity-40 animate-pulse" />
-            <Canvas
-              camera={{ position: [0, 0, 5], fov: 45 }}
-              className="canvas-container"
-            >
-              <color attach="background" args={['transparent']} />
-              <ambientLight intensity={0.5} />
-              <directionalLight position={[2, 2, 5]} intensity={1} />
-              <spotLight position={[-2, 2, 5]} intensity={0.5} angle={0.3} penumbra={1} />
-              <AnimatedSphere />
-              <Environment preset="city" />
-              <OrbitControls
-                enableZoom={false}
-                autoRotate
-                autoRotateSpeed={0.5}
-                maxPolarAngle={Math.PI / 2}
-                minPolarAngle={Math.PI / 2}
-              />
-            </Canvas>
-          </motion.div>
         </div>
       </motion.div>
 
       <div className="absolute inset-0 bg-grid-pattern opacity-[0.02] dark:opacity-[0.05]" />
     </section>
   );
-} 
+}

@@ -59,7 +59,7 @@ export function Header() {
             >
               Blog
             </Link>
-            <button
+            {/* <button
               onClick={toggleTheme}
               className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
               aria-label="Toggle theme"
@@ -69,7 +69,7 @@ export function Header() {
               ) : (
                 <MoonIcon className="h-5 w-5 text-gray-700 dark:text-gray-300" />
               )}
-            </button>
+            </button> */}
           </div>
 
           {/* Mobile Menu Button */}
@@ -109,16 +109,23 @@ export function Header() {
               >
                 Blog
               </Link>
-              <button
-                onClick={toggleTheme}
-                className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 w-full text-left"
-              >
-                {theme === "dark" ? "Light Mode" : "Dark Mode"}
-              </button>
             </div>
           </div>
         )}
       </nav>
+
+      {/* Floating dark/light toggle button */}
+      <button
+        onClick={toggleTheme}
+        className="fixed bottom-4 right-4 p-3 rounded-full bg-gray-100 dark:bg-gray-800 shadow-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors z-[1000]"
+        aria-label="Toggle theme"
+      >
+        {theme === "dark" ? (
+          <SunIcon className="h-6 w-6 text-gray-700 dark:text-gray-300" />
+        ) : (
+          <MoonIcon className="h-6 w-6 text-gray-700 dark:text-gray-300" />
+        )}
+      </button>
     </header>
   );
-} 
+}
