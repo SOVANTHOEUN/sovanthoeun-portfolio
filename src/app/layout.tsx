@@ -1,13 +1,29 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/shared/lib/theme-provider";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = localFont({
+  src: [
+    {
+      path: "../fonts/Inter_18pt-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../fonts/Inter_18pt-SemiBold.ttf",
+      weight: "600",
+      style: "normal",
+    },
+  ],
+});
+
+console.log("Font path:", "../../public/fonts/Inter_18pt-Regular.ttf");
 
 export const metadata: Metadata = {
-  title: "Sovanthoeun - Full Stack Developer",
-  description: "Portfolio of Sovanthoeun - Full Stack Developer with 7+ years of experience in Java, Spring, React, and TypeScript",
+  title: "Sovan Thoeun - Portfolio",
+  description:
+    "Full-stack developer specializing in Spring Cloud, React, and modern web technologies",
 };
 
 export default function RootLayout({

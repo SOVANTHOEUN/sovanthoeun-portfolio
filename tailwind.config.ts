@@ -8,6 +8,8 @@ const config: Config = {
     "./src/widgets/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/features/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/entities/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/shared/**/*.{js,ts,jsx,tsx,mdx}",
+    "./public/**/*.{html,js}",
   ],
   darkMode: "class",
   theme: {
@@ -18,39 +20,37 @@ const config: Config = {
       typography: {
         DEFAULT: {
           css: {
-            maxWidth: 'none',
-            color: 'inherit',
+            maxWidth: "none",
+            color: "inherit",
             a: {
-              color: 'inherit',
-              textDecoration: 'none',
-              fontWeight: '500',
+              color: "inherit",
+              textDecoration: "none",
+              fontWeight: "500",
             },
             strong: {
-              color: 'inherit',
+              color: "inherit",
             },
             code: {
-              color: 'inherit',
+              color: "inherit",
             },
             h1: {
-              color: 'inherit',
+              color: "inherit",
             },
             h2: {
-              color: 'inherit',
+              color: "inherit",
             },
             h3: {
-              color: 'inherit',
+              color: "inherit",
             },
             h4: {
-              color: 'inherit',
+              color: "inherit",
             },
           },
         },
       },
     },
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-  ],
+  plugins: [require("@tailwindcss/typography")],
 };
 
-export default config; 
+export default config;

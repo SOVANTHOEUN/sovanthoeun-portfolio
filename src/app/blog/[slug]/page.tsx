@@ -1,8 +1,7 @@
-import { Canvas } from "@react-three/fiber";
-import { Float, Text3D, Center } from "@react-three/drei";
+import React from "react";
 import { BlogClient } from "./client";
 
-// This would come from your data source 
+// This would come from your data source
 const blogPosts = [
   {
     slug: "building-modern-web-apps",
@@ -59,7 +58,8 @@ Building modern web applications is an exciting journey. With the right tools an
       {
         title: "Advanced Three.js Techniques",
         slug: "advanced-threejs",
-        excerpt: "Learn advanced techniques for creating stunning 3D web experiences.",
+        excerpt:
+          "Learn advanced techniques for creating stunning 3D web experiences.",
       },
       {
         title: "Next.js Performance Optimization",
@@ -77,35 +77,8 @@ export function generateStaticParams() {
   }));
 }
 
-// function BlogScene() {
-//   return (
-//     <Canvas
-//       camera={{ position: [0, 0, 5], fov: 45 }}
-//       style={{ height: '100%', width: '100%' }}
-//     >
-//       <ambientLight intensity={0.5} />
-//       <directionalLight position={[2, 2, 5]} intensity={1} />
-//       <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
-//         <Center>
-//           <Text3D
-//             font="/fonts/Inter_Bold.json"
-//             size={0.35}
-//             height={0.2}
-//             curveSegments={12}
-//           >
-//             {blogPosts[0].title}
-//             <meshStandardMaterial color="#6366f1" />
-//           </Text3D>
-//         </Center>
-//       </Float>
-//     </Canvas>
-//   );
-// }
-
 export default function BlogPage({ params }: { params: { slug: string } }) {
   const post = blogPosts.find((p) => p.slug === params.slug) || blogPosts[0];
-  
-  return (
-    <BlogClient post={post} />
-  );
-} 
+
+  return <BlogClient post={post} />;
+}
