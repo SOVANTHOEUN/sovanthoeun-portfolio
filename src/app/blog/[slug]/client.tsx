@@ -8,6 +8,7 @@ import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { BlogScene } from "./scene";
 import { useSpringValue } from "@react-spring/web";
 
+
 interface BlogPost {
   title: string;
   date: string;
