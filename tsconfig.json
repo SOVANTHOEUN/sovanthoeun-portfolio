@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["next", "next/types", "next/image-types", "node"],
+    "types": ["next", "next/types", "node"],
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,

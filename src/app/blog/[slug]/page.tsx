@@ -77,8 +77,14 @@ export function generateStaticParams() {
   }));
 }
 
-export default function BlogPage({ params }: { params: { slug: string } }) {
-  const post = blogPosts.find((p) => p.slug === params.slug) || blogPosts[0];
+// Update font path to use absolute path from the public folder
+const interFontPath = "/fonts/Inter_18pt-Regular.ttf";
 
-  return <BlogClient post={post} />;
+export default async function BlogPage({ params }: { params: Promise<{ slug: string }> | undefined }) {
+  const resolvedParams = params ? await params : { slug: "" };
+  const post = blogPosts.find((p) => p.slug === resolvedParams.slug) || blogPosts[0];
+
+  return (
+    <BlogClient post={post} fontPath={interFontPath} />
+  );
 }

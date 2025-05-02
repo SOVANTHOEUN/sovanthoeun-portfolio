@@ -6,8 +6,7 @@ import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { BlogScene } from "./scene";
-import { useSpring } from "framer-motion";
-
+import { useSpring } from "@react-spring/web";
 
 interface BlogPost {
   title: string;
@@ -22,6 +21,7 @@ interface BlogPost {
 
 interface BlogClientProps {
   post: BlogPost;
+  fontPath: string; // Added fontPath property
 }
 
 export function BlogClient({ post }: BlogClientProps) {
@@ -32,10 +32,11 @@ export function BlogClient({ post }: BlogClientProps) {
   });
 
   // Use spring animation for smoother transitions
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
+  const smoothProgress = useSpring({
+    to: async (next) => {
+      await next({ value: scrollYProgress.get() });
+    },
+    config: { tension: 100, friction: 30 },
   });
 
   const opacity = useTransform(smoothProgress, [0, 0.2], [1, 0]);

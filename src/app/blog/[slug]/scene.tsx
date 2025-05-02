@@ -18,7 +18,7 @@ export function BlogScene({ title }: BlogSceneProps) {
       <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
         <Center>
           <Text3D
-            font="/fonts/Inter_Bold.json"
+            font="/fonts/Inter/static/Inter_18pt-Bold.ttf" // Updated to a valid font path
             size={0.35}
             height={0.2}
             curveSegments={12}
@@ -30,4 +30,4 @@ export function BlogScene({ title }: BlogSceneProps) {
       </Float>
     </Canvas>
   );
-} 
+}
