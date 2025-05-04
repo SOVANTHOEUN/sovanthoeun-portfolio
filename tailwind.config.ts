@@ -2,14 +2,15 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx,css}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/widgets/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/features/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/entities/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/shared/**/*.{js,ts,jsx,tsx,mdx}",
-    "./public/**/*.{html,js}",
+    "./src/1_app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/2_view/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/3_widgets/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/4_features/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/5_entities/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/6_shared/**/*.{js,ts,jsx,tsx,mdx}",
+    "./public/**/*.{html,js,json}",
   ],
   darkMode: "class",
   theme: {

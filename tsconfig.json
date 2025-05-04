@@ -19,10 +19,19 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "src/*": ["src/*"],
+      "@public/*": ["public/*"],
+      "@app/*": ["./src/1_app/*"],
+      "@view/*": ["./src/2_view/*"],
+      "@widgets/*": ["./src/3_widgets/*"],
+      "@features/*": ["./src/4_features/*"],
+      "@entities/*": ["./src/5_entities/*"],
+      "@shared/*": ["./src/6_shared/*"],
+      "@font/*": ["public/fonts/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "next.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }
