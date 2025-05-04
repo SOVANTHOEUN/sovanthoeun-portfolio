@@ -10,7 +10,14 @@ export function Header() {
 
   useEffect(() => {
     setMounted(true);
+    console.log("Theme toggle mounted"); // Debugging log
   }, []);
+
+  const handleThemeToggle = () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    console.log(`Switching theme from ${theme} to ${newTheme}`); // Debugging log
+    setTheme(newTheme);
+  };
 
   if (!mounted) return null;
 
@@ -53,7 +60,7 @@ export function Header() {
         <button
           aria-label="Toggle theme"
           className="relative inline-flex items-center h-7 w-14 rounded-full bg-gray-200 dark:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          onClick={handleThemeToggle}
         >
           <span
             className={`inline-block h-6 w-6 transform rounded-full bg-white shadow transition-transform duration-300 ${theme === "dark" ? "translate-x-7" : "translate-x-1"}`}
