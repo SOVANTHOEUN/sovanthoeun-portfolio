@@ -6,7 +6,7 @@ const withTranspileModules = withTM(['react-markdown', 'framer-motion', 'react-s
 const nextConfig = withTranspileModules({
   basePath: '/sovanthoeun-portfolio',
   assetPrefix: '/sovanthoeun-portfolio',
-  // output: 'export',
+  output: 'export',
   images: {
     unoptimized: true,
   },
