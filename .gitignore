@@ -9,6 +9,11 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
+.env
+
+next.config.mjs
+next.config.ts
+
 
 # testing
 /coverage
